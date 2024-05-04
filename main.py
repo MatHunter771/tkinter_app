@@ -6,12 +6,14 @@ class gui():
       self.root = tk.Tk()
       self.root.title("Calculator")
       self.root.geometry("800x500")
-      self.label = tk.Label(self.root,text="Your calculation",font=("Arial",16))
+      self.label = tk.Label(self.root,text="Your calculation")
       self.label.pack(padx=10,pady=10)
-      self.calculation = tk.Text(self.root,height=1,font=("Arial",12))
+      self.calculation = tk.Text(self.root,height=1)
       self.calculation.pack(padx=10,pady=10)
-      self.button = tk.Button(self.root,text="enter",font=("Arial",15),command=self.calc)
-      self.button.pack(padx=0,pady=10)
+      self.button = tk.Button(self.root,text="enter",command=self.calc)
+      self.button.pack(padx=10,pady=10)
+      self.answer = tk.Button(self.root, text="ans", command=self.getAns)
+      self.answer.pack(padx=10, pady=10)
       self.root.mainloop()
   def calc(self):
       self.calc = self.calculation.get('1.0',tk.END)
@@ -49,5 +51,7 @@ class gui():
         messagebox.showinfo(title="result",message=f"{value1-value2}")
       elif cm == "+":
         messagebox.showinfo(title="result",message=f"{value1+value2}")
+  def getAns(self):
+      pass
 
 gui()
