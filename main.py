@@ -24,30 +24,30 @@ class gui():
         if i == " ":
           continue
         elif i == "+":
-          self.value1 = int(self.str)
+          self.value1 = float(self.str)
           self.cm = "+"
           self.str = ""
           continue
         elif i == "*":
-          self.value1 = int(self.str)
+          self.value1 = float(self.str)
           self.cm = "*"
           self.str = ""
           continue
         elif i == "-":
-          self.value1 = int(self.str)
+          self.value1 = float(self.str)
           self.cm = "-"
           self.str = ""
           continue
         elif i == "/":
-          self.value1 = int(self.str)
+          self.value1 = float(self.str)
           self.cm = "/"
           self.str=""
           continue
         self.str+=i
-      self.value2 = int(self.str)
+      self.value2 = float(self.str)
       if self.cm == "/":
-        messagebox.showinfo(title="result",message=f"{int(self.value1/self.value2)}")
-        self.answ = int(self.value1 / self.value2)
+        messagebox.showinfo(title="result",message=f"{self.value1/self.value2}")
+        self.answ = self.value1 / self.value2
       elif self.cm == "*":
         messagebox.showinfo(title="result",message=f"{self.value1*self.value2}")
         self.answ = self.value1 * self.value2
