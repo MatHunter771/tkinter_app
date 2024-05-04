@@ -45,13 +45,18 @@ class gui():
       value2 = int(str)
       if cm == "/":
         messagebox.showinfo(title="result",message=f"{value1/value2}")
+        self.answ = value1 / value2
       elif cm == "*":
         messagebox.showinfo(title="result",message=f"{value1*value2}")
+        self.answ = value1 * value2
       elif cm == "-":
         messagebox.showinfo(title="result",message=f"{value1-value2}")
+        self.answ = value1 - value2
       elif cm == "+":
         messagebox.showinfo(title="result",message=f"{value1+value2}")
+        self.answ = value1+value2
+      self.calculation.delete("1.0",tk.END)
   def getAns(self):
-      pass
+      self.calculation.insert(tk.END,self.answ)
 
 gui()
