@@ -14,49 +14,53 @@ class gui():
       self.button.pack(padx=10,pady=10)
       self.answer = tk.Button(self.root, text="ans", command=self.getAns)
       self.answer.pack(padx=10, pady=10)
+      self.history = tk.Label(self.root, text="history:")
+      self.history.pack(padx=10,pady=10)
       self.root.mainloop()
   def calc(self):
       self.calc = self.calculation.get('1.0',tk.END)
-      str=""
+      self.str=""
       for i in self.calc:
         if i == " ":
           continue
         elif i == "+":
-          value1 = int(str)
-          cm = "+"
-          str = ""
+          self.value1 = int(self.str)
+          self.cm = "+"
+          self.str = ""
           continue
         elif i == "*":
-          value1 = int(str)
-          cm = "*"
-          str = ""
+          self.value1 = int(self.str)
+          self.cm = "*"
+          self.str = ""
           continue
         elif i == "-":
-          value1 = int(str)
-          cm = "-"
-          str = ""
+          self.value1 = int(self.str)
+          self.cm = "-"
+          self.str = ""
           continue
         elif i == "/":
-          value1 = int(str)
-          cm = "/"
-          str=""
+          self.value1 = int(self.str)
+          self.cm = "/"
+          self.str=""
           continue
-        str+=i
-      value2 = int(str)
-      if cm == "/":
-        messagebox.showinfo(title="result",message=f"{value1/value2}")
-        self.answ = value1 / value2
-      elif cm == "*":
-        messagebox.showinfo(title="result",message=f"{value1*value2}")
-        self.answ = value1 * value2
-      elif cm == "-":
-        messagebox.showinfo(title="result",message=f"{value1-value2}")
-        self.answ = value1 - value2
-      elif cm == "+":
-        messagebox.showinfo(title="result",message=f"{value1+value2}")
-        self.answ = value1+value2
+        self.str+=i
+      self.value2 = int(self.str)
+      if self.cm == "/":
+        messagebox.showinfo(title="result",message=f"{int(self.value1/self.value2)}")
+        self.answ = int(self.value1 / self.value2)
+      elif self.cm == "*":
+        messagebox.showinfo(title="result",message=f"{self.value1*self.value2}")
+        self.answ = self.value1 * self.value2
+      elif self.cm == "-":
+        messagebox.showinfo(title="result",message=f"{self.value1-self.value2}")
+        self.answ = self.value1 - self.value2
+      elif self.cm == "+":
+        messagebox.showinfo(title="result",message=f"{self.value1+self.value2}")
+        self.answ = self.value1+self.value2
       self.calculation.delete("1.0",tk.END)
+      self.calculation_history = tk.Label(self.root, text=f'{self.value1} {self.cm} {self.value2} = {self.answ}')
+      self.calculation_history.pack(padx=10,pady=10)
   def getAns(self):
-      self.calculation.insert(tk.END,self.answ)
+      self.calculation.insert(tk.END,str(self.answ))
 
 gui()
