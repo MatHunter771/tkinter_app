@@ -12,7 +12,6 @@ class gui():
       self.calculation.pack(padx=10,pady=10)
       self.button = tk.Button(self.root,text="enter",font=("Arial",15),command=self.calc)
       self.button.pack(padx=0,pady=10)
-
       self.root.mainloop()
   def calc(self):
       self.calc = self.calculation.get('1.0',tk.END)
@@ -43,12 +42,12 @@ class gui():
         str+=i
       value2 = int(str)
       if cm == "/":
-        print(value1/value2)
+        messagebox.showinfo(title="result",message=f"{value1/value2}")
       elif cm == "*":
-        print(value1*value2)
+        messagebox.showinfo(title="result",message=f"{value1*value2}")
       elif cm == "-":
-        print(value1-value2)
+        messagebox.showinfo(title="result",message=f"{value1-value2}")
       elif cm == "+":
-        print(value1+value2)
+        messagebox.showinfo(title="result",message=f"{value1+value2}")
 
 gui()
