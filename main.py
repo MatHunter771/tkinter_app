@@ -1,12 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
-import matplotlib.pyplot as mpl
+import os
 
 
 class GUI:
 
     def __init__(self):
         self.root = tk.Tk()
+
+        self.root.title("Calculator")
+        self.root.geometry("800x500")
 
         self.mainFrame = tk.Frame(self.root)
         self.buttonsFrame = tk.Frame(self.root)
@@ -15,9 +18,6 @@ class GUI:
         self.menubar = tk.Menu(self.root)
         self.fileMenu = tk.Menu(self.menubar, tearoff=0)
         self.equalityMenu = tk.Menu(self.menubar, tearoff=0)
-
-        self.root.title("Calculator")
-        self.root.geometry("800x500")
 
         self.label = tk.Label(self.mainFrame, text="Your calculation:")
         self.calculation = tk.Text(self.mainFrame, height=1)
@@ -117,7 +117,7 @@ class GUI:
             self.root.destroy()
 
     def plotting(self):
-        pass
+        os.open()
 
 
 GUI()
