@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import matplotlib.pyplot as mpl
 
 
 class GUI:
@@ -10,6 +11,10 @@ class GUI:
         self.mainFrame = tk.Frame(self.root)
         self.buttonsFrame = tk.Frame(self.root)
         self.historyFrame = tk.Frame(self.root)
+
+        self.menubar = tk.Menu(self.root)
+        self.fileMenu = tk.Menu(self.menubar, tearoff=0)
+        self.equalityMenu = tk.Menu(self.menubar, tearoff=0)
 
         self.root.title("Calculator")
         self.root.geometry("800x500")
@@ -23,6 +28,15 @@ class GUI:
 
         self.history = tk.Label(self.historyFrame, text="history:")
 
+        self.menubar.add_cascade(menu=self.fileMenu, label="File")
+        self.menubar.add_cascade(menu=self.equalityMenu, label="Equality")
+
+        self.fileMenu.add_command(label="Close", command=self.shut_down)
+
+        self.equalityMenu.add_command(label="Plot", command=self.plotting)
+
+        self.root.config(menu=self.menubar)
+
         self.mainFrame.pack(padx=15, pady=10)
         self.buttonsFrame.pack(padx=15, pady=10)
         self.historyFrame.pack(side=tk.LEFT)
@@ -34,6 +48,8 @@ class GUI:
         self.answer.grid(row=0, column=1, padx=25)
 
         self.history.pack()
+
+        self.root.protocol("WM_DELETE_WINDOW", self.shut_down)
 
         self.root.mainloop()
 
@@ -95,6 +111,13 @@ class GUI:
             self.calcLogic()
         elif event.keysym == 'A' and event.state == 5:
             self.getAns()
+
+    def shut_down(self):
+        if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
+            self.root.destroy()
+
+    def plotting(self):
+        pass
 
 
 GUI()
