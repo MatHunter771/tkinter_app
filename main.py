@@ -16,8 +16,9 @@ class GUI:
 
         self.label = tk.Label(self.mainFrame, text="Your calculation:")
         self.calculation = tk.Text(self.mainFrame, height=1)
+        self.calculation.bind("<KeyPress>", self.shortcut)
 
-        self.button = tk.Button(self.buttonsFrame, text="enter", command=self.calc)
+        self.button = tk.Button(self.buttonsFrame, text="enter", command=self.calcLogic)
         self.answer = tk.Button(self.buttonsFrame, text="ans", command=self.getAns)
 
         self.history = tk.Label(self.historyFrame, text="history:")
@@ -36,7 +37,7 @@ class GUI:
 
         self.root.mainloop()
 
-    def calc(self):
+    def calcLogic(self):
         self.calc = self.calculation.get('1.0', tk.END)
         self.str = ""
 
@@ -88,6 +89,12 @@ class GUI:
 
     def getAns(self):
         self.calculation.insert(tk.END, str(self.answ))
+
+    def shortcut(self, event):
+        if event.keysym == 'Return' and event.state == 4:
+            self.calcLogic()
+        elif event.keysym == 'A' and event.state == 5:
+            self.getAns()
 
 
 GUI()
