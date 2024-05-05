@@ -10,6 +10,7 @@ class GUI:
 
         self.label = tk.Label(self.root, text='formula of function:')
         self.entry = tk.Entry(self.root)
+        self.entry.bind("<KeyPress>", self.shortcut)
         self.button = tk.Button(self.root, text='enter', command=self.plot)
 
         self.label.pack(padx=10, pady=10)
@@ -37,5 +38,10 @@ class GUI:
         plt.plot(self.xAxis, self.model)
         plt.grid()
         plt.show()
+
+    def shortcut(self, event):
+        if event.state == 0 and event.keysym == 'Return':
+            self.plot()
+
 
 GUI()

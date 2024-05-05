@@ -1,6 +1,6 @@
+import subprocess
 import tkinter as tk
 from tkinter import messagebox
-import os
 
 
 class GUI:
@@ -25,6 +25,7 @@ class GUI:
 
         self.button = tk.Button(self.buttonsFrame, text="enter", command=self.calcLogic)
         self.answer = tk.Button(self.buttonsFrame, text="ans", command=self.getAns)
+        self.clear = tk.Button(self.buttonsFrame, text="clear", command=self.clearCalc)
 
         self.history = tk.Label(self.historyFrame, text="history:")
 
@@ -46,6 +47,7 @@ class GUI:
 
         self.button.grid(row=0, column=0, padx=25)
         self.answer.grid(row=0, column=1, padx=25)
+        self.clear.grid(row=0, column=2, padx=25)
 
         self.history.pack()
 
@@ -117,7 +119,10 @@ class GUI:
             self.root.destroy()
 
     def plotting(self):
-        os.open()
+        subprocess.Popen(['python', 'plot_input.py'])
+
+    def clearCalc(self):
+        self.calculation.delete("1.0", tk.END)
 
 
 GUI()
