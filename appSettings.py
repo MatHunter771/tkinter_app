@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from tkinter import messagebox
 
 class GUI:
     def __init__(self):
@@ -26,6 +27,6 @@ class GUI:
         self.root.mainloop()
 
     def shut_down(self):
-        pass
-
+        if messagebox.askyesno(title= 'save?', message='Did you make a save?'):
+            self.root.destroy()
 GUI()
