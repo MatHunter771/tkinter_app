@@ -2,7 +2,6 @@ import subprocess
 import tkinter as tk
 from tkinter import messagebox
 
-
 class GUI:
 
     def __init__(self):
@@ -32,6 +31,7 @@ class GUI:
         self.menubar.add_cascade(menu=self.fileMenu, label="File")
         self.menubar.add_cascade(menu=self.equalityMenu, label="Equality")
 
+        self.fileMenu.add_command(label='Settings', command=self.settings)
         self.fileMenu.add_command(label="Close", command=self.shut_down)
 
         self.equalityMenu.add_command(label="Plot", command=self.plotting)
@@ -124,5 +124,6 @@ class GUI:
     def clearCalc(self):
         self.calculation.delete("1.0", tk.END)
 
-
+    def settings(self):
+        subprocess.Popen(['python', 'appSettings.py'])
 GUI()
