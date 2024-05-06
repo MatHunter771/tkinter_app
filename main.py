@@ -126,4 +126,6 @@ class GUI:
 
     def settings(self):
         subprocess.Popen(['python', 'appSettings.py'])
+
+
 GUI()

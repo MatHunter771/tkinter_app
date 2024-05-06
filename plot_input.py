@@ -22,6 +22,7 @@ class GUI:
     def plot(self):
         self.equality = self.entry.get()
         self.str = ''
+
         for x in self.equality:
             if ' ' == x:
                 continue
@@ -30,11 +31,15 @@ class GUI:
                 self.str = ''
                 continue
             self.str += x
+
         self.intercept = float(self.str)
         self.xAxis = np.array([0, 100])
+
         def func(x):
             return self.slope * x + self.intercept
+
         self.model = list(map(func, self.xAxis))
+
         plt.plot(self.xAxis, self.model)
         plt.grid()
         plt.show()
