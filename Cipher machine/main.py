@@ -11,13 +11,20 @@ class GUI:
         ctk.set_default_color_theme('dark-blue')
         ctk.set_appearance_mode('dark')
 
-        self.text = ctk.CTkLabel(self.root, text='Enter text:')
-        self.entry = ctk.CTkEntry(self.root)
-        self.enter = ctk.CTkButton(self.root, text='Enter', command=self.cypher)
+        self.mainFrame = ctk.CTkFrame(self.root)
+        self.buttonsFrame = ctk.CTkFrame(self.root)
 
-        self.text.pack(padx=25, pady=20)
-        self.entry.pack(padx=10, pady=10)
-        self.enter.pack()
+        self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
+        self.entry = ctk.CTkEntry(self.mainFrame, width=600)
+        self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypher)
+
+        self.mainFrame.pack(padx=25, pady=20)
+        self.buttonsFrame.pack(pady=5)
+
+        self.text.grid(row=0)
+        self.entry.grid(row=1)
+
+        self.enter.grid()
 
         self.root.protocol('WM_DELETE_WINDOW', self.shut_down)
 
