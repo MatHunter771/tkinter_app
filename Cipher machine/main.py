@@ -15,10 +15,11 @@ class GUI:
 
         self.mainFrame = ctk.CTkFrame(self.root)
         self.buttonsFrame = ctk.CTkFrame(self.root)
-        self.historyFrame = ctk.CTkFrame(self.root)
+        self.historyFrame = ctk.CTkFrame(self.root, height=100)
 
         self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
         self.entry = ctk.CTkEntry(self.mainFrame, width=600)
+        self.t = 1
         self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypherCeasar)
 
         self.history = ctk.CTkLabel(self.historyFrame, text='History:')
@@ -51,9 +52,11 @@ class GUI:
                 outputSentence += str(signs[p+3-(len(signs)-1)])
 
         messagebox.showinfo(message=outputSentence, title='Output')
-        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}')
-        self.historyElement.grid()
-
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}', font=('Arial', 10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
 
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
