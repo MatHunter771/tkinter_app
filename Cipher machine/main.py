@@ -1,3 +1,5 @@
+import string
+
 import customtkinter as ctk
 from tkinter import messagebox
 
@@ -16,7 +18,7 @@ class GUI:
 
         self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
         self.entry = ctk.CTkEntry(self.mainFrame, width=600)
-        self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypher)
+        self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypherCeasar)
 
         self.mainFrame.pack(padx=25, pady=20)
         self.buttonsFrame.pack(pady=5)
@@ -30,8 +32,19 @@ class GUI:
 
         self.root.mainloop()
 
-    def cypher(self):
-        pass
+    def cypherCeasar(self):
+        signs = list(string.ascii_letters)
+        inputSentence = self.entry.get()
+        outputSentence = ''
+
+        for i in range(len(inputSentence)):
+            p = signs.index(inputSentence[i])
+            if p + 3 < len(signs):
+                outputSentence += str(signs[p+3])
+            else:
+                outputSentence += str(signs[p+3-(len(signs)-1)])
+
+        messagebox.showinfo(message=outputSentence, title='Output')
 
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
