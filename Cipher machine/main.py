@@ -15,18 +15,24 @@ class GUI:
 
         self.mainFrame = ctk.CTkFrame(self.root)
         self.buttonsFrame = ctk.CTkFrame(self.root)
+        self.historyFrame = ctk.CTkFrame(self.root)
 
         self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
         self.entry = ctk.CTkEntry(self.mainFrame, width=600)
         self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypherCeasar)
 
+        self.history = ctk.CTkLabel(self.historyFrame, text='History:')
+
         self.mainFrame.pack(padx=25, pady=20)
         self.buttonsFrame.pack(pady=5)
+        self.historyFrame.pack()
 
         self.text.grid(row=0)
         self.entry.grid(row=1)
 
         self.enter.grid()
+
+        self.history.grid()
 
         self.root.protocol('WM_DELETE_WINDOW', self.shut_down)
 
@@ -45,6 +51,9 @@ class GUI:
                 outputSentence += str(signs[p+3-(len(signs)-1)])
 
         messagebox.showinfo(message=outputSentence, title='Output')
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}')
+        self.historyElement.grid()
+
 
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
