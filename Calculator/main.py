@@ -12,7 +12,7 @@ class GUI:
 
         self.mainFrame = tk.Frame(self.root)
         self.buttonsFrame = tk.Frame(self.root)
-        self.historyFrame = tk.Frame(self.root)
+        self.historyFrame = tk.Frame(self.root, height=100)
 
         self.menubar = tk.Menu(self.root)
         self.fileMenu = tk.Menu(self.menubar, tearoff=0)
@@ -27,6 +27,7 @@ class GUI:
         self.clear = tk.Button(self.buttonsFrame, text="clear", command=self.clearCalc)
 
         self.history = tk.Label(self.historyFrame, text="history:")
+        self.t = 1
 
         self.menubar.add_cascade(menu=self.fileMenu, label="File")
         self.menubar.add_cascade(menu=self.equalityMenu, label="Equality")
@@ -49,7 +50,7 @@ class GUI:
         self.answer.grid(row=0, column=1, padx=25)
         self.clear.grid(row=0, column=2, padx=25)
 
-        self.history.pack()
+        self.history.grid()
 
         self.root.protocol("WM_DELETE_WINDOW", self.shut_down)
 
@@ -103,7 +104,10 @@ class GUI:
 
         self.calculation.delete("1.0", tk.END)
         self.calculation_history = tk.Label(self.historyFrame, text=f'{self.value1} {self.cm} {self.value2} = {self.answ}')
-        self.calculation_history.pack(padx=10, pady=10)
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.calculation_history.grid(row=self.t, pady=5)
 
     def getAns(self):
         self.calculation.insert(tk.END, str(self.answ))
