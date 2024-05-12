@@ -1,6 +1,20 @@
 import subprocess
 import tkinter as tk
 from tkinter import messagebox
+import appSettings as set
+
+
+def extractNumber(str):
+    output = ''
+    for i in str:
+        try:
+            int(i)
+        except:
+            continue
+        else:
+            output += i
+    return output
+
 
 class GUI:
 
@@ -129,7 +143,14 @@ class GUI:
         self.calculation.delete("1.0", tk.END)
 
     def settings(self):
-        subprocess.Popen(['python', 'appSettings.py'])
+#        subprocess.Popen(['python', 'appSettings.py'])
+        set.GUI()
+        pd = open('calculatorSettings0001', 'r')
+        sizeStr = pd.readline()
+        checkStr = pd.readline()
+        self.size = extractNumber(sizeStr)
+        self.check = extractNumber(checkStr)
+        pd.close()
 
 
 GUI()
