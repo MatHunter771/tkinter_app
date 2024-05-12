@@ -3,6 +3,7 @@ from tkinter import messagebox
 
 class GUI:
     def __init__(self):
+        self.saved = 0
         self.root = ctk.CTk()
         self.root.title('Settings')
         self.root.geometry('256x243')
@@ -14,9 +15,9 @@ class GUI:
         self.valueOfCheck = ctk.IntVar()
 
         self.checkbox = ctk.CTkCheckBox(self.root, text='close without question', variable=self.valueOfCheck)
-        self.pb = ctk.CTkSlider(self.root, from_=1, to=20, variable=self.size)
+        self.pb = ctk.CTkSlider(self.root, from_=8, to=36, variable=self.size)
         self.label = ctk.CTkLabel(self.root, text='size of font')
-        self.button = ctk.CTkButton(self.root, text='Apply', command=self.shut_down())
+        self.button = ctk.CTkButton(self.root, text='Apply', command=self.save)
 
         self.checkbox.pack(padx=10, pady=10)
         self.label.pack(padx=10, pady=10)
@@ -27,6 +28,15 @@ class GUI:
         self.root.mainloop()
 
     def shut_down(self):
-        if messagebox.askyesno(title= 'save?', message='Did you make a save?'):
+        if self.saved:
             self.root.destroy()
+        elif messagebox.askyesno(title='save?', message="Are you want to leave setting?"):
+            self.root.destroy()
+
+    def save(self):
+        pd = open("calculatorSettings0001", "w")
+        pd.write(f'sizeFont: {self.size.get()}\ncheck: {self.valueOfCheck.get()}')
+        pd.close()
+        self.saved = 1
+
 GUI()
