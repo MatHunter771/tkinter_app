@@ -23,6 +23,7 @@ class GUI:
 
         self.bin = ctk.CTkButton(self.buttonsFrame, text='Bin', command=self.binaryCode)
         self.ceasar = ctk.CTkButton(self.buttonsFrame, text='Ceasar', command=self.cypherCeasar)
+        self.hex = ctk.CTkButton(self.buttonsFrame, text='Hex', command=self.hexCode)
 
         self.history = ctk.CTkLabel(self.historyFrame, text='History:')
 
@@ -35,6 +36,7 @@ class GUI:
 
         self.bin.grid(row=0, column=0, padx=5)
         self.ceasar.grid(row=0, column=1, padx=5)
+        self.hex.grid(row=0, column=2, padx=5)
 
         self.history.grid()
 
@@ -66,6 +68,18 @@ class GUI:
         outputString = ''
         for x in inputString:
             outputString += f'{bin(ord(x))[2:]} '
+        messagebox.showinfo(message=outputString, title='Output')
+        self.historyElement = ctk.CTkLabel(self.historyFrame,text=f'{inputString} -> {outputString}', font=('Arial',10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
+
+    def hexCode(self):
+        inputString = self.entry.get()
+        outputString = ''
+        for x in inputString:
+            outputString += f'{hex(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
         self.historyElement = ctk.CTkLabel(self.historyFrame,text=f'{inputString} -> {outputString}', font=('Arial',10))
         self.t += 1
