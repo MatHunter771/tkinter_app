@@ -20,7 +20,9 @@ class GUI:
         self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
         self.entry = ctk.CTkEntry(self.mainFrame, width=600)
         self.t = 1
-        self.enter = ctk.CTkButton(self.buttonsFrame, text='Enter', command=self.cypherCeasar)
+
+        self.bin = ctk.CTkButton(self.buttonsFrame, text='Bin', command=self.binaryCode)
+        self.ceasar = ctk.CTkButton(self.buttonsFrame, text='Ceasar', command=self.cypherCeasar)
 
         self.history = ctk.CTkLabel(self.historyFrame, text='History:')
 
@@ -31,7 +33,8 @@ class GUI:
         self.text.grid(row=0)
         self.entry.grid(row=1)
 
-        self.enter.grid()
+        self.bin.grid(row=0, column=0, padx=5)
+        self.ceasar.grid(row=0, column=1, padx=5)
 
         self.history.grid()
 
@@ -53,6 +56,18 @@ class GUI:
 
         messagebox.showinfo(message=outputSentence, title='Output')
         self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}', font=('Arial', 10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
+
+    def binaryCode(self):
+        inputString = self.entry.get()
+        outputString = ''
+        for x in inputString:
+            outputString += f'{bin(ord(x))[2:]} '
+        messagebox.showinfo(message=outputString, title='Output')
+        self.historyElement = ctk.CTkLabel(self.historyFrame,text=f'{inputString} -> {outputString}', font=('Arial',10))
         self.t += 1
         if self.t > 4:
             self.t = 1

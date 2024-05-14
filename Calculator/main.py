@@ -19,6 +19,7 @@ def extractNumber(str):
 class GUI:
 
     def __init__(self):
+        self.size = 40
         self.root = tk.Tk()
 
         self.root.title("Calculator")
@@ -32,7 +33,7 @@ class GUI:
         self.fileMenu = tk.Menu(self.menubar, tearoff=0)
         self.equalityMenu = tk.Menu(self.menubar, tearoff=0)
 
-        self.label = tk.Label(self.mainFrame, text="Your calculation:")
+        self.label = tk.Label(self.mainFrame, text="Your calculation:", font={'Arial',self.size})
         self.calculation = tk.Text(self.mainFrame, height=1)
         self.calculation.bind("<KeyPress>", self.shortcut)
 
