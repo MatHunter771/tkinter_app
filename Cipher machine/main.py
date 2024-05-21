@@ -1,5 +1,4 @@
 import string
-
 import customtkinter as ctk
 from tkinter import messagebox
 
@@ -50,6 +49,13 @@ class GUI:
         self.root.protocol('WM_DELETE_WINDOW', self.shut_down)
 
         self.root.mainloop()
+        
+    def historyOut(self, x, p, k, inp, out, methd):
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inp} -> {out} ({methd})', font=('Arial', 10))
+        x += 1
+        if x > k:
+            x = p
+        self.historyElement.grid(row=x, pady=5)
 
     def cypherCeasar(self):
         signs = list(string.ascii_letters)
@@ -64,11 +70,7 @@ class GUI:
                 outputSentence += str(signs[p+3-(len(signs)-1)])
 
         messagebox.showinfo(message=outputSentence, title='Output')
-        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}', font=('Arial', 10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='Ceasar')
 
     def deCypherCeasar(self):
         signs = list(string.ascii_letters)
@@ -83,12 +85,7 @@ class GUI:
                 outputSentence += str(signs[p - 3 - (len(signs) - 1)])
 
         messagebox.showinfo(message=outputSentence, title='Output')
-        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}',
-                                           font=('Arial', 10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='de-Ceasar')
 
     def binaryCode(self):
         inputString = self.entry.get()
@@ -96,21 +93,12 @@ class GUI:
         for x in inputString:
             outputString += f'{bin(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
-        self.historyElement = ctk.CTkLabel(self.historyFrame,text=f'{inputString} -> {outputString}', font=('Arial',10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputString, outputString, methd='Bin')
 
     def deBinaryCode(self):
         inputString = self.entry.get()
         outputString = str(int(inputString, 2))
-        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputString} -> {outputString}',
-                                           font=('Arial', 10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Bin')
 
     def hexCode(self):
         inputString = self.entry.get()
@@ -118,21 +106,12 @@ class GUI:
         for x in inputString:
             outputString += f'{hex(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
-        self.historyElement = ctk.CTkLabel(self.historyFrame,text=f'{inputString} -> {outputString}', font=('Arial',10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputString, outputString, methd='Hex')
 
     def deHexCode(self):
         inputString = self.entry.get()
         outputString = str(int(inputString, 16))
-        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputString} -> {outputString}',
-                                           font=('Arial', 10))
-        self.t += 1
-        if self.t > 4:
-            self.t = 1
-        self.historyElement.grid(row=self.t, pady=5)
+        self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Hex')
 
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
