@@ -71,7 +71,24 @@ class GUI:
         self.historyElement.grid(row=self.t, pady=5)
 
     def deCypherCeasar(self):
-        pass
+        signs = list(string.ascii_letters)
+        inputSentence = self.entry.get()
+        outputSentence = ''
+
+        for i in range(len(inputSentence)):
+            p = signs.index(inputSentence[i])
+            if p - 3 < len(signs):
+                outputSentence += str(signs[p - 3])
+            else:
+                outputSentence += str(signs[p - 3 - (len(signs) - 1)])
+
+        messagebox.showinfo(message=outputSentence, title='Output')
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputSentence} -> {outputSentence}',
+                                           font=('Arial', 10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
 
     def binaryCode(self):
         inputString = self.entry.get()
@@ -86,7 +103,14 @@ class GUI:
         self.historyElement.grid(row=self.t, pady=5)
 
     def deBinaryCode(self):
-        pass
+        inputString = self.entry.get()
+        outputString = str(int(inputString, 2))
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputString} -> {outputString}',
+                                           font=('Arial', 10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
 
     def hexCode(self):
         inputString = self.entry.get()
@@ -101,8 +125,15 @@ class GUI:
         self.historyElement.grid(row=self.t, pady=5)
 
     def deHexCode(self):
-        pass
-    
+        inputString = self.entry.get()
+        outputString = str(int(inputString, 16))
+        self.historyElement = ctk.CTkLabel(self.historyFrame, text=f'{inputString} -> {outputString}',
+                                           font=('Arial', 10))
+        self.t += 1
+        if self.t > 4:
+            self.t = 1
+        self.historyElement.grid(row=self.t, pady=5)
+
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
             self.root.destroy()
