@@ -25,6 +25,10 @@ class GUI:
         self.ceasar = ctk.CTkButton(self.buttonsFrame, text='Ceasar', command=self.cypherCeasar)
         self.hex = ctk.CTkButton(self.buttonsFrame, text='Hex', command=self.hexCode)
 
+        self.deBin = ctk.CTkButton(self.buttonsFrame, text='de-Bin', command=self.deBinaryCode)
+        self.deCeasar = ctk.CTkButton(self.buttonsFrame, text='de-Ceasar', command=self.deCypherCeasar)
+        self.deHex = ctk.CTkButton(self.buttonsFrame, text='de-Hex', command=self.deHexCode)
+
         self.history = ctk.CTkLabel(self.historyFrame, text='History:')
 
         self.mainFrame.pack(padx=25, pady=20)
@@ -34,9 +38,12 @@ class GUI:
         self.text.grid(row=0)
         self.entry.grid(row=1)
 
-        self.bin.grid(row=0, column=0, padx=5)
-        self.ceasar.grid(row=0, column=1, padx=5)
-        self.hex.grid(row=0, column=2, padx=5)
+        self.bin.grid(row=0, column=0, padx=5, pady=5)
+        self.ceasar.grid(row=0, column=1, padx=5, pady=5)
+        self.hex.grid(row=0, column=2, padx=5, pady=5)
+        self.deBin.grid(row=1, column=0, padx=5, pady=5)
+        self.deCeasar.grid(row=1, column=1, padx=5, pady=5)
+        self.deHex.grid(row=1, column=2, padx=5, pady=5)
 
         self.history.grid()
 
@@ -63,6 +70,9 @@ class GUI:
             self.t = 1
         self.historyElement.grid(row=self.t, pady=5)
 
+    def deCypherCeasar(self):
+        pass
+
     def binaryCode(self):
         inputString = self.entry.get()
         outputString = ''
@@ -74,6 +84,9 @@ class GUI:
         if self.t > 4:
             self.t = 1
         self.historyElement.grid(row=self.t, pady=5)
+
+    def deBinaryCode(self):
+        pass
 
     def hexCode(self):
         inputString = self.entry.get()
@@ -87,6 +100,9 @@ class GUI:
             self.t = 1
         self.historyElement.grid(row=self.t, pady=5)
 
+    def deHexCode(self):
+        pass
+    
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
             self.root.destroy()
