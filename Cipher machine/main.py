@@ -18,6 +18,7 @@ class GUI:
 
         self.text = ctk.CTkLabel(self.mainFrame, text='Enter text:')
         self.entry = ctk.CTkEntry(self.mainFrame, width=600)
+        self.entry.bind('<KeyPress>', self.shortcut)
         self.t = 1
 
         self.bin = ctk.CTkButton(self.buttonsFrame, text='Bin', command=self.binaryCode)
@@ -71,6 +72,9 @@ class GUI:
 
         messagebox.showinfo(message=outputSentence, title='Output')
         self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='Ceasar')
+        self.entry.delete(0, ctk.END)
+        self.output = outputSentence
+
 
     def deCypherCeasar(self):
         signs = list(string.ascii_letters)
@@ -86,6 +90,9 @@ class GUI:
 
         messagebox.showinfo(message=outputSentence, title='Output')
         self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='de-Ceasar')
+        self.entry.delete(0, ctk.END)
+        self.output = outputSentence
+
 
     def binaryCode(self):
         inputString = self.entry.get()
@@ -94,11 +101,17 @@ class GUI:
             outputString += f'{bin(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='Bin')
+        self.entry.delete(0, ctk.END)
+        self.output = outputString
+
 
     def deBinaryCode(self):
         inputString = self.entry.get()
         outputString = str(int(inputString, 2))
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Bin')
+        self.entry.delete(0, ctk.END)
+        self.output = outputString
+
 
     def hexCode(self):
         inputString = self.entry.get()
@@ -107,11 +120,21 @@ class GUI:
             outputString += f'{hex(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='Hex')
+        self.entry.delete(0, ctk.END)
+        self.output = outputString
+
 
     def deHexCode(self):
         inputString = self.entry.get()
         outputString = str(int(inputString, 16))
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Hex')
+        self.entry.delete(0, ctk.END)
+        self.output = outputString
+
+    def shortcut(self, event):
+        if event.keysym == 'A' and event.state == 5:
+            self.entry.delete(0, ctk.END)
+            self.entry.insert(ctk.END, self.output)
 
     def shut_down(self):
         if messagebox.askyesno(title="Quit", message="Do you want to quit?"):
