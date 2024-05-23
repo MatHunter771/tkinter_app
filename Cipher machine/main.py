@@ -21,6 +21,8 @@ class GUI:
         self.entry.bind('<KeyPress>', self.shortcut)
         self.t = 1
 
+        self.clear = ctk.CTkButton(self.buttonsFrame, text='Clear', command=self.clearEntry)
+
         self.bin = ctk.CTkButton(self.buttonsFrame, text='Bin', command=self.binaryCode)
         self.ceasar = ctk.CTkButton(self.buttonsFrame, text='Ceasar', command=self.cypherCeasar)
         self.hex = ctk.CTkButton(self.buttonsFrame, text='Hex', command=self.hexCode)
@@ -38,6 +40,7 @@ class GUI:
         self.text.grid(row=0)
         self.entry.grid(row=1)
 
+        self.clear.grid(row=0, column=3, padx=5, pady=5)
         self.bin.grid(row=0, column=0, padx=5, pady=5)
         self.ceasar.grid(row=0, column=1, padx=5, pady=5)
         self.hex.grid(row=0, column=2, padx=5, pady=5)
@@ -58,6 +61,8 @@ class GUI:
             x = p
         self.historyElement.grid(row=x, pady=5)
 
+    def clearEntry(self):
+        self.entry.delete(0, ctk.END)
     def cypherCeasar(self):
         signs = list(string.ascii_letters)
         inputSentence = self.entry.get()
@@ -72,7 +77,7 @@ class GUI:
 
         messagebox.showinfo(message=outputSentence, title='Output')
         self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='Ceasar')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputSentence
 
 
@@ -90,7 +95,7 @@ class GUI:
 
         messagebox.showinfo(message=outputSentence, title='Output')
         self.historyOut(self.t, 1, 4, inputSentence, outputSentence, methd='de-Ceasar')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputSentence
 
 
@@ -101,7 +106,7 @@ class GUI:
             outputString += f'{bin(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='Bin')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputString
 
 
@@ -109,7 +114,7 @@ class GUI:
         inputString = self.entry.get()
         outputString = str(int(inputString, 2))
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Bin')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputString
 
 
@@ -120,7 +125,7 @@ class GUI:
             outputString += f'{hex(ord(x))[2:]} '
         messagebox.showinfo(message=outputString, title='Output')
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='Hex')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputString
 
 
@@ -128,12 +133,12 @@ class GUI:
         inputString = self.entry.get()
         outputString = str(int(inputString, 16))
         self.historyOut(self.t, 1, 4, inputString, outputString, methd='de-Hex')
-        self.entry.delete(0, ctk.END)
+        self.clearEntry()
         self.output = outputString
 
     def shortcut(self, event):
         if event.keysym == 'A' and event.state == 5:
-            self.entry.delete(0, ctk.END)
+            self.clearEntry()
             self.entry.insert(ctk.END, self.output)
 
     def shut_down(self):
