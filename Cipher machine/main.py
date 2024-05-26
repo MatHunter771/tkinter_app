@@ -21,7 +21,8 @@ class GUI:
         self.entry.bind('<KeyPress>', self.shortcut)
         self.t = 1
 
-        self.clear = ctk.CTkButton(self.buttonsFrame, text='Clear', command=self.clearEntry)
+        self.clear = ctk.CTkButton(self.buttonsFrame, text='Clear Entry', command=self.clearEntry)
+        self.clearHistory = ctk.CTkButton(self.buttonsFrame, text='Clear History', command=self.historyClear)
 
         self.bin = ctk.CTkButton(self.buttonsFrame, text='Bin', command=self.binaryCode)
         self.ceasar = ctk.CTkButton(self.buttonsFrame, text='Ceasar', command=self.cypherCeasar)
@@ -41,6 +42,7 @@ class GUI:
         self.entry.grid(row=1)
 
         self.clear.grid(row=0, column=3, padx=5, pady=5)
+        self.clearHistory.grid(row=1, column=3, padx=5, pady=5)
         self.bin.grid(row=0, column=0, padx=5, pady=5)
         self.ceasar.grid(row=0, column=1, padx=5, pady=5)
         self.hex.grid(row=0, column=2, padx=5, pady=5)
@@ -60,6 +62,14 @@ class GUI:
         if x > k:
             x = p
         self.historyElement.grid(row=x, pady=5)
+
+    def historyClear(self):
+        self.t = 0
+        self.historyFrame.destroy()
+        self.historyFrame = ctk.CTkFrame(self.root)
+        self.historyFrame.pack()
+        self.history = ctk.CTkLabel(self.historyFrame, text='History:')
+        self.history.grid()
 
     def clearEntry(self):
         self.entry.delete(0, ctk.END)
